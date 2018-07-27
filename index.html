@@ -51,9 +51,10 @@
         // pass that object to two function calls that will fill the header and hero info
         // Wrapping function in the onload handler guarantees that it won't run until the JSON request *has* completed
         request.onload = function() {
-                var superHeroes = request.response;
-                populateHeader(superHeroes);
-                showHeroes(superHeroes);
+                var response = request.response;
+                var twitterId = response.id;
+                populateHeader(twitterId);
+                // showHeroes(superHeroes);
             }
             // call the parameter jsonObj to make it clear we're parsing a JSON object
         function populateHeader(jsonObj) {
