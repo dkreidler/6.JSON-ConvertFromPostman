@@ -29,7 +29,9 @@
         var section = document.querySelector('section');
         // setup for json request
         // store the json source URL in a variable
-        var requestURL = 'https://api.twitter.com/1.1/users/show.json?screen_name=' + screenName;
+        // use the commented version of the link with the input from the screen. for now, hardcode for testing.
+        // var requestURL = 'https://api.twitter.com/1.1/users/show.json?screen_name=' + screenName;
+        var requestURL = 'https://api.twitter.com/1.1/users/show.json?screen_name=dkreidler';
 
         // create a variable for the XHR, which has methods(?)
         var request = new XMLHttpRequest();
