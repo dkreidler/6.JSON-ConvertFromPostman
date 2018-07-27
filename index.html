@@ -52,8 +52,8 @@
         // Wrapping function in the onload handler guarantees that it won't run until the JSON request *has* completed
         request.onload = function() {
                 var response = request.response;
-                var twitterId = response.id;
-                populateHeader(twitterId);
+                //var twitterId = response.id;
+                populateHeader(response);
                 // showHeroes(superHeroes);
             }
             // call the parameter jsonObj to make it clear we're parsing a JSON object
@@ -61,7 +61,7 @@
             // create a variable to hold the header to be pulled from the json object
             var myH1 = document.createElement('h1');
             // set the variable text content equal to the value of squadName
-            myH1.textContent = jsonObj['squadName'];
+            myH1.textContent = jsonObj['id'];
             // add the variable text to the header
             header.appendChild(myH1);
 
