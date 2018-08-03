@@ -25,31 +25,31 @@ request.send();
 // pass that object to two function calls that will fill the header and hero info
 // Wrapping function in the onload handler guarantees that it won't run until the JSON request *has* completed
 request.onload = function() {
-        var response = request.response;
-        //var twitterId = response.id;
-        populateHeader(response);
-        // showHeroes(superHeroes);
-    }
-    // call the parameter jsonObj to make it clear we're parsing a JSON object
+    var response = request.response;
+    //var twitterId = response.id;
+    populateHeader(response);
+    // showHeroes(superHeroes);
+};
+// call the parameter jsonObj to make it clear we're parsing a JSON object
 function populateHeader(jsonObj) {
     // create a variable to hold the header to be pulled from the json object
     var myH1 = document.createElement('h1');
     // set the variable text content equal to the value of squadName
-    myH1.textContent = jsonObj['id'];
+    myH1.textContent = jsonObj.id;
     // add the variable text to the header
     header.appendChild(myH1);
 
     // create a variable to hold the data in the homeTown & formed object endpoints
     var myPara = document.createElement('p');
     // set the value of the para variable to a string including homeTown and formed.
-    myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+    myPara.textContent = 'Hometown: ' + jsonObj.homeTown + ' // Formed: ' + jsonObj.formed;
     // add the paragraph to the header            
     header.appendChild(myPara);
 }
 // create a function that will pull in data from individual member objects
 function showHeroes(jsonObj) {
     // create a new variable of the array of members
-    var heroes = jsonObj['members'];
+    var heroes = jsonObj.members;
     // for each member of members, create variables to hold each bit of data
     for (let i = 0; i < heroes.length; i++) {
         var myArticle = document.createElement('article');
