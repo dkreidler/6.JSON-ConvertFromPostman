@@ -2,17 +2,15 @@ var screenName = document.getElementById('twHandle');
 var header = document.querySelector('header');
 var section = document.querySelector('section');
 
-import twConsumerKey from 'app-env.js';
+/* import twConsumerKey from "app-env.js";
 import twConsumerSecret from 'app-env.js';
 import twAccessToken from 'app-env.js';
 import twAccessTokenSecret from 'app-env.js';
-import googleMapsGeocodingAPIKey from 'app-env.js';
+import googleMapsGeocodingAPIKey from 'app-env.js'; */
 
+import * as keys from '/app-env.js';
 
-
-
-
-
+console.log(keys.twConsumerKey);
 // setup for json request
 // store the json source URL in a variable
 // use the commented version of the link with the input from the screen. for now, hardcode for testing.
@@ -20,6 +18,7 @@ import googleMapsGeocodingAPIKey from 'app-env.js';
 var requestURL = 'https://api.twitter.com/1.1/users/show.json?screen_name=dkreidler';
 
 // create a variable for the XHR, which has methods(?)
+var data = null;
 var xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
 
@@ -32,12 +31,12 @@ xhr.addEventListener("readystatechange", function() {
 // the previously stored URL
 xhr.open('GET', requestURL);
 xhr.setRequestHeader("Cache-Control", "no-cache");
-xhr.setRequestHeader();
+xhr.setRequestHeader("oauth_consumer_key", twConsumerKey);
 // telling XHR to be expecting a JSON response
 xhr.responseType = 'json';
 
 // then we send the request with the send() method
-xhr.send();
+xhr.send(data);
 
 // wait for the response from the server, then dealing with it
 // store response object in a new variable called superHeroes
