@@ -8,8 +8,7 @@ import twAccessToken from 'app-env.js';
 import twAccessTokenSecret from 'app-env.js';
 import googleMapsGeocodingAPIKey from 'app-env.js'; */
 
-import * as keys from '/app-env.js';
-
+import { twConsumerKey, twConsumerSecret, twAccessToken, twAccessTokenSecret, googleMapsGeocodingAPIKey } from './app-env.js';
 console.log(keys.twConsumerKey);
 // setup for json request
 // store the json source URL in a variable
