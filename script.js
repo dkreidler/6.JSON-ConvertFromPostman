@@ -2,14 +2,14 @@ var screenName = document.getElementById('twHandle');
 var header = document.querySelector('header');
 var section = document.querySelector('section');
 
-/* import twConsumerKey from "app-env.js";
-import twConsumerSecret from 'app-env.js';
-import twAccessToken from 'app-env.js';
-import twAccessTokenSecret from 'app-env.js';
-import googleMapsGeocodingAPIKey from 'app-env.js'; */
+import {
+    twConsumerKey,
+    twConsumerSecret,
+    twAccessToken,
+    twAccessTokenSecret,
+    googleMapsGeocodingAPIKey
+} from '/app-env.js';
 
-import { twConsumerKey, twConsumerSecret, twAccessToken, twAccessTokenSecret, googleMapsGeocodingAPIKey } from './app-env.js';
-console.log(keys.twConsumerKey);
 // setup for json request
 // store the json source URL in a variable
 // use the commented version of the link with the input from the screen. for now, hardcode for testing.
@@ -30,7 +30,13 @@ xhr.addEventListener("readystatechange", function() {
 // the previously stored URL
 xhr.open('GET', requestURL);
 xhr.setRequestHeader("Cache-Control", "no-cache");
-xhr.setRequestHeader("oauth_consumer_key", twConsumerKey);
+xhr.setRequestHeader("Authorization", "OAuth oauth_consumer_key=" + twConsumerKey +
+    ",oauth_token=" + twAccessToken +
+    ",oauth_signature_method=HMAC-SHA1" +
+    ",oauth_timestamp=1533513827" +
+    ",oauth_nonce=IUWuS0QIGk4" +
+    ",oauth_version=1.0" +
+    ",oauth_signature=ATnOOMRaTLA5z43uOo%2BS%2F2sD73I%3D");
 // telling XHR to be expecting a JSON response
 xhr.responseType = 'json';
 
@@ -41,8 +47,8 @@ xhr.send(data);
 // store response object in a new variable called superHeroes
 // pass that object to two function calls that will fill the header and hero info
 // Wrapping function in the onload handler guarantees that it won't run until the JSON request *has* completed
-request.onload = function() {
-    var response = request.response;
+xhr.onload = function() {
+    var response = xhr.response;
     //var twitterId = response.id;
     populateHeader(response);
     // showHeroes(superHeroes);
