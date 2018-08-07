@@ -14,6 +14,14 @@ import {
 // store the json source URL in a variable
 // use the commented version of the link with the input from the screen. for now, hardcode for testing.
 // var requestURL = 'https://api.twitter.com/1.1/users/show.json?screen_name=' + screenName;
+function genNonce() {
+    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._~'
+    const result = [];
+    window.crypto.getRandomValues(new Uint8Array(32)).forEach(c =>
+        result.push(charset[c % charset.length]));
+    return result.join('');
+}
+var timeStamp = Math.floor(Date.now() / 1000);
 var requestURL = 'https://api.twitter.com/1.1/users/show.json?screen_name=dkreidler';
 
 // create a variable for the XHR, which has methods(?)
@@ -26,6 +34,14 @@ xhr.addEventListener("readystatechange", function() {
         console.log(this.responseText);
     }
 });
+
+// Failed to load https://api.twitter.com/1.1/users/show.json?screen_name=dkreidler: 
+// Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin'
+// header is present on the requested resource. Origin 'http://localhost:1337' is therefore not allowed access.
+// The response had HTTP status code 400.
+
+//this appears to only work server-side (so why the fuck does it work in Postman!?)
+
 // HTTP method is GET as we are just retrieving data from 
 // the previously stored URL
 xhr.open('GET', requestURL);
@@ -33,12 +49,12 @@ xhr.setRequestHeader("Cache-Control", "no-cache");
 xhr.setRequestHeader("Authorization", "OAuth oauth_consumer_key=" + twConsumerKey +
     ",oauth_token=" + twAccessToken +
     ",oauth_signature_method=HMAC-SHA1" +
-    ",oauth_timestamp=1533513827" +
-    ",oauth_nonce=IUWuS0QIGk4" +
+    ",oauth_timestamp=" + timeStamp +
+    ",oauth_nonce=" + genNonce() +
     ",oauth_version=1.0" +
     ",oauth_signature=ATnOOMRaTLA5z43uOo%2BS%2F2sD73I%3D");
 // telling XHR to be expecting a JSON response
-xhr.responseType = 'json';
+// xhr.responseType = 'json';
 
 // then we send the request with the send() method
 xhr.send(data);
